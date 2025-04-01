@@ -6,11 +6,22 @@ let results = document.getElementById("budgetResults")
 button.addEventListener("click", calculate)
 
 function calculate() {
-    
-    let userIncome = Number(prompt("Enter your income."))
-    let userExpenses = Number(prompt("Enter your expenses."))
-    let months = Number(prompt("Enter the numbers of months to project the budget over."))
+    let userIncome
+    let userExpenses
+    let months
 
+    try{
+        userIncome = Number(prompt("Enter your income."))
+        userExpenses = Number(prompt("Enter your expenses."))
+        months = Number(prompt("Enter the numbers of months to project the budget over."))
+
+        if (isNaN(userIncome) || isNaN(userExpenses) || isNaN(months)){
+            throw new Error("Please enter a number.")
+        }
+    }
+    catch (error){
+        console.error(error.message)
+    }
     let totalSavings = userIncome - userExpenses
     let monthlyIncome = userIncome/months
     let monthlyExpenses = userExpenses/months
